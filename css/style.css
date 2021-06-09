@@ -1,7 +1,4 @@
 /*
-Template Name: Bodo - Simple One Page Personal
-Author: BdgPixel
-Author URI:  http://themeforest.net/user/BdgPixel
 */
 /* -----------------------------------------------------------
 TABLE OF CONTENTS:
@@ -912,7 +909,7 @@ ul.portfolio-image li .desc{
   width: 100%;
 }
 .bg-about {
-  background: url('../images/bb.JPG');
+  background: url('../images/bb.jpg');
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
