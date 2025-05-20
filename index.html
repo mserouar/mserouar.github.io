@@ -175,18 +175,63 @@
           </p>
         </section>
 
+       
+        
+          <!-- Gallery Section -->
+          <div class="gallery-container">
+            <div class="gallery-track">
+              <!-- First set of images -->
+              <div class="gallery-item" data-description="<h2>High Throughput Phenotyping</h2><h3>2-Dimensions RGB Images</h3><br>Plant Health Semantic Segmentation Classification into <span style='color:#428C39;font-weight:bold;display:inline;'>Healthy</span>, <span style='color:#D2AB1A;font-weight:bold;display:inline;'>Senescent</span> and <span style='color:#77440F;font-weight:bold;display:inline;'>Necrotic</span>" data-alt="Plant Health Classification">
+                <img src="./assets/images/gallery/JV.png" alt="Plant Health Classification">
+              </div>
 
+              <div class="gallery-item" data-description="<h2>High Throughput Phenotyping</h2><h3>2-Dimensions RGB Images</h3><br>Multi-Species Semantic Segmentation Classification into several species (Weeds, Poaceae Wheat, Poaceae Maize, Linaceae, Fabaceae, Solanaceae, Asteraceae, Brassicaceae) <br> <br> Here an example of <span style='color:#EA761B;font-weight:bold;display:inline;'>Weeds</span> | <span style='color:#DB1D6F;font-weight:bold;display:inline;'>Wheat</span> | <span style='color:#22CDA8;font-weight:bold;display:inline;'>Faba</span> mixed crop" data-alt="Multi-Species Classification">
+                <img src="./assets/images/gallery/MultiSpecies.png" alt="Multi-Species Classification">
+              </div>
 
-        <header>
-          <h2 class="h2 article-title">Resume</h2>
+              <div class="gallery-item" data-description="<h2>High Throughput Phenotyping</h2><h3>2-Dimensions RGB Images</h3><br>Multi-Organs Semantic Segmentation Classification into several plant organs (<span style='color:#0E49F2;font-weight:bold;display:inline;'>Head/Ear/Fruit</span>, <span style='color:#9933FF;font-weight:bold;display:inline;'>Stem</span>, <span style='color:#EBB59D;font-weight:bold;display:inline;'>Leaves</span>, <span style='color:#B200F6;font-weight:bold;display:inline;'>Capsule</span> and <span style='color:#D1D94F;font-weight:bold;display:inline;'>Flower</span>)" data-alt="Multi-Organs Classification">
+                <img src="./assets/images/gallery/MultiOrgans.png" alt="Multi-Organs Classification">
+              </div>
+
+              <div class="gallery-item" data-description="<h2>High Throughput Phenotyping</h2><h3>3-Dimensions LiDAR point clouds</h3><br>Maize Leaves Instance Segmentation<br> For architectural traits extraction (Azimuth Orientation, Inclination, Dimensions, ...)" data-alt="LiDAR Leaves Segmentation">
+                <img src="./assets/images/gallery/LIDAR_Extraction.png" alt="LiDAR Leaves Segmentation">
+              </div>
+
+              <!-- Duplicate set for infinite scroll -->
+              <div class="gallery-item" data-description="<h2>High Throughput Phenotyping</h2><h3>3-Dimensions LiDAR point clouds</h3><br>Canopy Transmittance and LAI calculations<br> According to beam LiDAR couting" data-alt="LiDAR Transmittance">
+                <img src="./assets/images/gallery/Transmittance.png" alt="LiDAR Transmittance">
+              </div>
+              
+              <div class="gallery-item" data-description="<h2>Modelling work</h2><h3>3D crop model and ray-tracing</h3><br>Maize Leaves Instance Segmentation<br> Link to photosynthesis" data-alt="3D Crop Model">
+                <img src="./assets/images/gallery/CORNIBU.png" alt="3D Crop Model">
+              </div>
+
+              <div class="gallery-item" data-description="<h2>Remote Sensing</h2><h3>Deep Learning Classification</h3><br>Crop type classification of Friuli-Venezia Giulia Region<br> Main predicted crops thanks to Deep Learning and SENTINEL-2 bands." data-alt="Remote Sensing Classification">
+                <img src="./assets/images/gallery/Classif_Friul.png" alt="Remote Sensing Classification">
+              </div>
+
+              <div class="gallery-item" data-description="<h2>Data Scraping</h2><h3>Data Vizualisation</h3><br>OSM contribution extraction and projection<br> Solar Energy Sites Across Europe" data-alt="Solar Energy Map">
+                <img src="./assets/images/gallery/PV_Europe.png" alt="Solar Energy Map">
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal -->
+          <div class="modal" id="imageModal">
+            <span class="close-modal">&times;</span>
+            <div class="modal-content">
+              <img id="modalImage" src="" alt="Modal Image">
+              <div class="modal-description" id="modalDescription"></div>
+            </div>
+          </div>
         </header>
 
 
 
 
-
-
-
+        <header>
+          <h2 class="h2 article-title">Resume</h2>
+   
 
         <section class="timeline">
 
@@ -283,7 +328,7 @@
 
 
 
-  <div style="line-height:1000%;">
+  <div style="line-height:850%;">
               <br>
               </div>
 
@@ -529,7 +574,7 @@
 
 
 
-  <div style="line-height:850%;">
+  <div style="line-height:500%;">
               <br>
               </div>
 
@@ -610,7 +655,7 @@
 
 
 
-  <div style="line-height:850%;">
+  <div style="line-height:500%;">
               <br>
               </div>
 
@@ -745,6 +790,89 @@
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-</body>
+  <!-- Gallery JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      const modalDesc = document.getElementById('modalDescription');
+      const closeBtn = document.querySelector('.close-modal');
+      const galleryTrack = document.querySelector('.gallery-track');
+      const galleryContainer = document.querySelector('.gallery-container');
 
+      // Function to add click event to a gallery item
+      function addClickEvent(item) {
+        item.addEventListener('click', function() {
+          const img = this.querySelector('img');
+          const description = this.getAttribute('data-description');
+          
+          modalImg.src = img.src;
+          modalDesc.innerHTML = description;
+          modal.classList.add('active');
+        });
+      }
+
+      // Add click event to all initial gallery items
+      document.querySelectorAll('.gallery-item').forEach(addClickEvent);
+
+      closeBtn.addEventListener('click', function() {
+        modal.classList.remove('active');
+      });
+
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+        }
+      });
+
+      // Infinite scroll logic
+      let scrollPosition = 0;
+      let isScrolling = false;
+      let scrollInterval;
+
+      function startScroll() {
+        if (!isScrolling) {
+          isScrolling = true;
+          scrollInterval = setInterval(() => {
+            const firstItem = galleryTrack.firstElementChild;
+            const itemWidth = firstItem.offsetWidth + 20; // Width + margin
+            
+            scrollPosition -= 0.75; // Reduced speed by 25% (from 1 to 0.75)
+            
+            // When first item is completely out of view
+            if (Math.abs(scrollPosition) >= itemWidth) {
+              // Clone the first item and add click event
+              const clonedItem = firstItem.cloneNode(true);
+              addClickEvent(clonedItem);
+              
+              // Move first item to the end
+              galleryTrack.appendChild(clonedItem);
+              firstItem.remove();
+              scrollPosition = 0;
+            }
+            
+            galleryTrack.style.transform = `translateX(${scrollPosition}px)`;
+          }, 16); // ~60fps
+        }
+      }
+
+      function stopScroll() {
+        isScrolling = false;
+        clearInterval(scrollInterval);
+        // Restart scrolling after a short delay
+        setTimeout(startScroll, 100);
+      }
+
+      // Start scrolling when hovering over container
+      galleryContainer.addEventListener('mouseenter', stopScroll);
+      galleryContainer.addEventListener('mouseleave', startScroll);
+
+      // Initial scroll
+      startScroll();
+    });
+  </script>
+
+</main>
+
+</body>
 </html>
